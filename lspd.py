@@ -4,9 +4,9 @@ from collections import MutableMapping
 from hashlib import md5, sha1, sha224, sha256, sha384, sha512
 from itertools import chain
 
-class LSPD(MutableMapping):
 
-    def __init__(self, hashers = None):
+class LSPD(MutableMapping):
+    def __init__(self, hashers=None):
         self._dict = {}
         self._hashers = hashers if hashers else (md5, sha1, sha224, sha256, sha384, sha512)
 
@@ -31,9 +31,9 @@ class LSPD(MutableMapping):
     def __delitem__(self, key):
         del self._dict[self.calculate_key(key)]
 
-class LSPSSDD(MutableMapping):
 
-    def __init__(self, hashers = None):
+class LSPSSDD(MutableMapping):
+    def __init__(self, hashers=None):
         self._short_keys_dict = {}
         self._dict = LSPD(hashers)
         self._short_keys_lenght = len(self._dict.calculate_key("a"))
@@ -67,5 +67,3 @@ class LSPSSDD(MutableMapping):
             del self._short_keys_dict[key]
         else:
             del self._dict[key]
-
-
