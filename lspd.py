@@ -36,10 +36,10 @@ class LSPSSDD(MutableMapping):
     def __init__(self, hashers=None):
         self._short_keys_dict = {}
         self._dict = LSPD(hashers)
-        self._short_keys_lenght = len(self._dict.calculate_key("a"))
+        self._short_keys_length = len(self._dict.calculate_key("a"))
 
     def __contains__(self, key):
-        if len(key) < self._short_keys_lenght:
+        if len(key) < self._short_keys_length:
             return key in self._short_keys_dict
         else:
             return key in self._dict
@@ -51,19 +51,19 @@ class LSPSSDD(MutableMapping):
         return len(self._dict) + len(self._short_keys_dict)
 
     def __getitem__(self, key):
-        if len(key) < self._short_keys_lenght:
+        if len(key) < self._short_keys_length:
             return self._short_keys_dict[key]
         else:
             return self._dict[key]
 
     def __setitem__(self, key, value):
-        if len(key) < self._short_keys_lenght:
+        if len(key) < self._short_keys_length:
             self._short_keys_dict[key] = value
         else:
             self._dict[key] = value
 
     def __delitem__(self, key):
-        if len(key) < self._short_keys_lenght:
+        if len(key) < self._short_keys_length:
             del self._short_keys_dict[key]
         else:
             del self._dict[key]
